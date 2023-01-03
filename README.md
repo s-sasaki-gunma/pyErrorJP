@@ -1,0 +1,2 @@
+# pyErrorJP
+Pythonのエラーコードの文章に対して、日本語の補足説明をつけるJavascript
