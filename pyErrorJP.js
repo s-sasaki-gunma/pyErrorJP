@@ -44,6 +44,9 @@ function generateMsgJP(error_document){
     if ( 'invalid syntax' == error_message ){
       return '　文法が正しくありません。入力ミス等が無いか確認してください。';
     }
+    if ( 'invalid decimal literal' == error_message ){
+      return '　変数名の先頭に数字は使えません。入力ミス等が無いか確認してください。';
+    }
     if ( m = (/name '(.*)' is not defined/).exec(error_message) ) {
       return '　「' + m[1] + '」という名前の変数などは見つかりませんでした。スペルミスや、大文字小文字の打ち間違い等をしていないか確認してください。';
     }
@@ -97,6 +100,9 @@ function generateMsgJP(error_document){
     }
     if ( 'invalid non-printable character U+3000' == error_message ){
         return '　全角空白が使われています。半角空白に直してください。';
+    }
+    if ( 'invalid character in identifier' == error_message ){
+        return '　全角文字が使われています。記号や空白、英数字を半角に直してください。';
     }
     if ( m = (/invalid character '([（）’”＋－＊／％：＜＞＝！])' \((.*)\)/).exec(error_message) ){
         return '　全角の ' + m[1] + ' が使われています。英語入力状態で書き直してください。';
@@ -171,10 +177,13 @@ function generateMsgJP(error_document){
         return '　' + m[1] + '() に \'' + m[2] + '\' という未対応のキーワード引数が与えられています。';
     }
     if ( 'int() can\'t convert non-string with explicit base' == error_message ){
-        return '　int() は引数を2つ与えた場合には、第一引数は「文字列型の数字」、第二引数は「2以上36以下の整数」です。\n　例： int("1010",2) と書くと、2進数の「1010」が10進数でいくつになるか求められる。'
+        return '　int() は引数を2つ与えた場合には、第二引数は「基数」とする第一引数は「数字」を10進数へ変換します。\n　例： int("1010",2) と書くと、2進数の「1010」が10進数でいくつになるか求められる。'
     }
 
     // ValueError
+    if ( 'int() base must be >= 2 and <= 36, or 0' == error_message ){
+        return '　int() は引数を2つ与えた場合には、第一引数は「文字列型の数字」、第二引数は「0 もしくは 2以上36以下の整数」です。\n　例： int("1010",2) と書くと、2進数の「1010」が10進数でいくつになるか求められる。'
+    }
     if ( m = (/invalid literal for int\(\) with base (\d+): (\'.*\')/).exec(error_message) ){
         return '　文字列 ' + m[2] + ' は、' + m[1] + '進法の数値として不適切です。';
     }
