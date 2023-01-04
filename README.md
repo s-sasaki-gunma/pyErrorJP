@@ -1,6 +1,7 @@
 # pyErrorJP
 
-　Pythonのエラーコードの文章に対して、日本語の補足説明をつけるJavaScript
+　Pythonのエラーコードの文章に対して、日本語の補足説明をつけるJavaScript。  
+　基本的なアルゴリズムは「[nodai2hITC/etupem](https://github.com/nodai2hITC/etupem)」を元にしている。
 
 # How to use
 
